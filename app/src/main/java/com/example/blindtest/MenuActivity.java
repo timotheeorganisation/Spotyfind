@@ -13,7 +13,7 @@ import com.example.blindtest.BDD.Variables;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button btnLogout;
+    private Button btnLogout, btnJouer, btnHistorique, btnClassement;
     private Session session;
     private TextView ses;
     private static final String PREFS_NAME = "PreName";
@@ -24,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        btnJouer = findViewById(R.id.btnJouer);
         ses = findViewById(R.id.edtSession);
         int PRIVATE_MODE =0;
 
@@ -45,6 +46,14 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        btnJouer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent themeActivity = new Intent(MenuActivity.this, ThemeActivity.class);
+                startActivity(themeActivity);
             }
         });
     }

@@ -1,10 +1,11 @@
 package com.example.blindtest.Classes;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.Date;
+@DatabaseTable( tableName = "T_Theme" )
+public class Theme  {
 
-public class Theme {
     @DatabaseField( columnName = "id", generatedId = true)
     private int id;
     @DatabaseField

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Blindtest</string>
+    <string name="title_activity_login">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="seConnecter">"Se connecter"
+    </string>
+    <string name="score">"Scores"
+    </string>
+    <string name="inscription">"S'inscrire"    </string>
+    <string name="pseudo">Pseudo"    </string>
+    <string name="password">"Mot de Passe"    </string>
+    <string name="password2">"Confirmez le Mot de Passe"</string>
+    <string name="jouer">"Jouer"</string>
+    <string name="historiqueParties">"Historique de mes Parties"</string>
+    <string name="classementThemes">"Classement themes"</string>
+    <string name="logout">"se Déconnecter"</string>
+    <string name="title_activity_choice_theme">ChoiceThemeActivity</string>
+
+</resources>
