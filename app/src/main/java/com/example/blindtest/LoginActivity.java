@@ -74,8 +74,6 @@ import java.sql.SQLException;
             {
                 Membre membreco = databaseManager.searchMembre(email);
                  ((Variables) this.getApplication()).setMembreConnecte(membreco);
-
-
             }
             catch (SQLException e)
             {

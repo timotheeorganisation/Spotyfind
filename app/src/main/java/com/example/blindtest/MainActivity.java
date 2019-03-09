@@ -36,19 +36,20 @@ public class MainActivity extends AppCompatActivity {
         btnScore = (Button) findViewById(R.id.btnScores);
         databaseManager = new DatabaseManager( this );
         //requêtes
-        /*
-        databaseManager.insertMembre(new Membre("vn", "vn", "vn", new Date(), true));
+
+     /*   databaseManager.insertMembre(new Membre("vn", "vn", "vn", new Date(), true));
         databaseManager.insertMembre(new Membre("user", "user", "user@user.fr", new Date(), false));
     databaseManager.insertTheme(new Theme("Classique"));
         databaseManager.insertTheme(new Theme("Cinema"));
         databaseManager.insertTheme(new Theme("Series"));
         databaseManager.insertNiveau(new Niveau());
 databaseManager.insertNiveau(new Niveau());
-databaseManager.insertNiveau(new Niveau());
-*/
+databaseManager.insertNiveau(new Niveau());*/
 
 
-        List<Membre> membres = databaseManager.readMembres();
+
+
+       /* List<Membre> membres = databaseManager.readMembres();
         for(Membre membre : membres)
         {
             scoresView.append(membre.toString());
@@ -58,11 +59,12 @@ databaseManager.insertNiveau(new Niveau());
         {
             scoresView.append(theme.toString());
         }
+*/
 
-        List<Niveau> niveaux = databaseManager.readNiveaux();
-        for(Niveau niveau : niveaux)
+        List<Question> questions = databaseManager.readQuestions();
+        for(Question question : questions)
         {
-            scoresView.append(String.valueOf(niveau.getId()));
+            scoresView.append("niveau " + String.valueOf(question.getNiveau().getId()) +  "   theme   " + question.getTheme().getLibelle() +  "    musique   " + question.getPathMp3());
         }
         btn.setEnabled(true);
         //evenement on click )=> changement de fenetre vers login

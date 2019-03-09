@@ -34,14 +34,14 @@
         android:id="@+id/scoresView"
         android:layout_width="288dp"
         android:layout_height="265dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="32dp"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
 

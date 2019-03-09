@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.example.blindtest.Classes.Membre;
 import com.example.blindtest.Classes.Niveau;
+import com.example.blindtest.Classes.Partie;
 import com.example.blindtest.Classes.Question;
+import com.example.blindtest.Classes.Reponse;
 import com.example.blindtest.Classes.Theme;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -26,73 +28,68 @@ import java.util.List;
 
 public class DatabaseManager extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "Blindtest.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_EMAIL = "mail";
     private static final String COLUMN_PASS = "mdp";
-    public DatabaseManager(Context context)
-    {
+
+    public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-        try{
+        try {
             TableUtils.createTable(connectionSource, Membre.class);
             TableUtils.createTableIfNotExists(connectionSource, Theme.class);
             TableUtils.createTableIfNotExists(connectionSource, Niveau.class);
             TableUtils.createTableIfNotExists(connectionSource, Question.class);
             Log.e("DATABASE", "Base bien crée");
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur dans la création de la base", exception);
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try{
+        try {
             TableUtils.dropTable(connectionSource, Membre.class, true);
-         //   TableUtils.dropTable(connectionSource, Theme.class, true);
+            //   TableUtils.dropTable(connectionSource, Theme.class, true);
             TableUtils.createTableIfNotExists(connectionSource, Theme.class);
             TableUtils.createTableIfNotExists(connectionSource, Niveau.class);
             TableUtils.createTableIfNotExists(connectionSource, Question.class);
+            TableUtils.createTableIfNotExists(connectionSource, Partie.class);
+            TableUtils.createTableIfNotExists(connectionSource, Reponse.class);
+
             onCreate(database, connectionSource);
             Log.i("DATABASE", "Base bien modifié");
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur dans la création de la base", exception);
         }
     }
 
     public void insertMembre(Membre membre) {
         try {
-            Dao<Membre, Integer> dao = getDao(Membre. class);
+            Dao<Membre, Integer> dao = getDao(Membre.class);
             dao.create(membre);
             ContentValues values = new ContentValues();
             //values.put(COLUMN_EMAIL, membre.getMail());
             //values.put(COLUMN_PASS, membre.getMdp());
 
             Log.i("DATABASE", "insertions ok");
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
         }
     }
 
-    public List<Membre> readMembres(){
+    public List<Membre> readMembres() {
         try {
             Dao<Membre, Integer> dao = getDao(Membre.class);
-            List<Membre> membres =  dao.queryForAll();
+            List<Membre> membres = dao.queryForAll();
             Log.i("DATABASE", "insertions ok");
             return membres;
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur de consult dans la base", exception);
             return null;
         }
@@ -100,26 +97,23 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
 
     public void insertTheme(Theme theme) {
         try {
-            Dao<Theme, Integer> dao = getDao(Theme. class);
+            Dao<Theme, Integer> dao = getDao(Theme.class);
             dao.create(theme);
             ContentValues values = new ContentValues();
 
             Log.i("DATABASE", "insertions ok");
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
         }
     }
-    public List<Theme> readThemes(){
+
+    public List<Theme> readThemes() {
         try {
             Dao<Theme, Integer> dao = getDao(Theme.class);
-            List<Theme> themes =  dao.queryForAll();
+            List<Theme> themes = dao.queryForAll();
             Log.i("DATABASE", "insertions themes ok");
             return themes;
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur de consult dans la base", exception);
             return null;
         }
@@ -127,26 +121,23 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
 
     public void insertNiveau(Niveau niveau) {
         try {
-            Dao<Niveau, Integer> dao = getDao(Niveau. class);
+            Dao<Niveau, Integer> dao = getDao(Niveau.class);
             dao.create(niveau);
             ContentValues values = new ContentValues();
 
             Log.i("DATABASE", "insertions ok");
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
         }
     }
-    public List<Niveau> readNiveaux(){
+
+    public List<Niveau> readNiveaux() {
         try {
             Dao<Niveau, Integer> dao = getDao(Niveau.class);
-            List<Niveau> niveaux =  dao.queryForAll();
+            List<Niveau> niveaux = dao.queryForAll();
             Log.i("DATABASE", "insertions themes ok");
             return niveaux;
-        }
-        catch(Exception exception)
-        {
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur de consult dans la base", exception);
             return null;
         }
@@ -154,30 +145,50 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
 
     public void insertQuestion(Question question) {
         try {
-            Dao<Question, Integer> dao = getDao(Question. class);
+            Dao<Question, Integer> dao = getDao(Question.class);
             dao.create(question);
-            Log.i("DATABASE", "insertions ok");
-        }
-        catch(Exception exception)
-        {
+            Log.i("DATABASE", "insertions ok" + question.getTheme().getLibelle());
+        } catch (Exception exception) {
             Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
         }
     }
 
-   public Theme searchTheme(Integer id) throws SQLException {
+    public void insertReponses(Reponse reponse) {
+        try {
+            Dao<Reponse, Integer> dao = getDao(Reponse.class);
+            dao.create(reponse);
+            Log.i("DATABASE", "insertions ok");
+        } catch (Exception exception) {
+            Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
+        }
+    }
 
-       Dao<Theme, Integer> themeDao = getDao(Theme.class);
-       Theme theme = themeDao.queryForId(id);
+    public List<Question> readQuestions() {
+        try {
+            Dao<Question, Integer> dao = getDao(Question.class);
+            List<Question> questions = dao.queryForAll();
+            Log.i("DATABASE", "questions ok");
+            return questions;
+        } catch (Exception exception) {
+            Log.e("DATABASE", "Erreur de consult dans la base", exception);
+            return null;
+        }
+    }
 
-       return  themeDao.queryForId(id);
-   }
+    public Theme searchTheme(Integer id) throws SQLException {
+
+        Dao<Theme, Integer> themeDao = getDao(Theme.class);
+        Theme theme = themeDao.queryForId(id);
+
+        return themeDao.queryForId(id);
+    }
 
     public Niveau searchNiveau(Integer id) throws SQLException {
 
         Dao<Niveau, Integer> themeDao = getDao(Niveau.class);
         Niveau niveau = themeDao.queryForId(id);
 
-        return  themeDao.queryForId(id);
+        return themeDao.queryForId(id);
     }
 
     public Membre searchMembre(String email) throws SQLException {
@@ -187,25 +198,26 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         st.where().like("mail", email);
         PreparedQuery<Membre> query = st.prepare();
         return themeDao.queryForFirst(query);
-
-
-        /*
-        Dao<Membre, Integer> themeDao = getDao(Membre.class);
-        return  themeDao.queryRa()*/
     }
 
-//fonction de connexion
-    public boolean getUser(String email, String pass)
-    {
+    public List<Reponse> searchReponses(Question question) throws SQLException {
+
+        Dao<Reponse, String> ReponseDao = getDao(Reponse.class);
+      //  List<Reponse> reponses = ReponseDao.queryForEq("question_idQuestion",question);
+
+        return ReponseDao.queryForEq("question_idQuestion",question);
+    }
+
+    //fonction de connexion
+    public boolean getUser(String email, String pass) {
         String selectQuery = "select * from T_MEMBRE  where " + COLUMN_EMAIL + " = " + "'" + email + "'" + "and "
-            + COLUMN_PASS + "="
-        + " '" +pass+ "'";
+                + COLUMN_PASS + "="
+                + " '" + pass + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
 
-        if(cursor.getCount() > 0 )
-        {
+        if (cursor.getCount() > 0) {
             return true;
         }
         cursor.close();
@@ -214,18 +226,17 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         return false;
     }
 
-    public Cursor getUserDetails(String email, String pass)
-    {
-        String selectQuery = "select id from T_MEMBRE  where " + COLUMN_EMAIL + " = " + "'"+email +"'" + "and "
+    public Cursor getUserDetails(String email, String pass) {
+        String selectQuery = "select id from T_MEMBRE  where " + COLUMN_EMAIL + " = " + "'" + email + "'" + "and "
                 + COLUMN_PASS + "="
-                + " '" +pass+ "'";
+                + " '" + pass + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
 
         Log.i("DATABASE", "insertions themes ok" + cursor.moveToFirst());
 
-            return cursor;
+        return cursor;
 
 
     }
