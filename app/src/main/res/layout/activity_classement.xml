@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/design_default_color_primary_dark"
+    tools:context=".ClassementActivity">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"></Spinner>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"></Spinner>
+
+    <Button
+        android:id="@+id/btnClassementThemes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Regarder @string/classementThemes" />
+
+    <ListView
+        android:id="@+id/lvHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="273dp"
+        android:layout_marginTop="130dp"
+        />
+</LinearLayout>

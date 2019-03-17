@@ -175,6 +175,17 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public void insertPartie(Partie partie) {
+        try {
+            Dao<Partie, Integer> dao = getDao(Partie.class);
+            dao.create(partie);
+            ContentValues values = new ContentValues();
+            Log.i("DATABASE", "insertions ok");
+        } catch (Exception exception) {
+            Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
+        }
+    }
+
     public Theme searchTheme(Integer id) throws SQLException {
 
         Dao<Theme, Integer> themeDao = getDao(Theme.class);
@@ -200,12 +211,81 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         return themeDao.queryForFirst(query);
     }
 
+    public Theme searchThemeByLibelle(String libelle) throws SQLException {
+
+        Dao<Theme, String> themeDao = getDao(Theme.class);
+        QueryBuilder<Theme, String> st = themeDao.queryBuilder();
+        st.where().like("libelle", libelle);
+        PreparedQuery<Theme> query = st.prepare();
+        return themeDao.queryForFirst(query);
+    }
+
     public List<Reponse> searchReponses(Question question) throws SQLException {
 
         Dao<Reponse, String> ReponseDao = getDao(Reponse.class);
       //  List<Reponse> reponses = ReponseDao.queryForEq("question_idQuestion",question);
-
         return ReponseDao.queryForEq("question_idQuestion",question);
+    }
+
+    public List<Question> searchQuestionsByThemeAndLevel(Integer theme, Integer niveau) throws SQLException {
+        Dao<Question, Integer> themeDao = getDao(Question.class);
+        QueryBuilder <Question, Integer> queryBuilder =  themeDao.queryBuilder();
+        Where<Question, Integer> where = queryBuilder.where();
+        where.like("niveau_id", niveau);
+        where.and();
+        where.like("theme_id", theme);
+        PreparedQuery<Question> preparedQuery = queryBuilder.prepare();
+        Dao<Question, Integer> QuestionDao = getDao(Question.class);
+        return QuestionDao.query(preparedQuery);
+    }
+
+    public List<Reponse> searchReponseByQuestion(Integer theme, Integer niveau) throws SQLException {
+        Dao<Question, Integer> themeDao = getDao(Question.class);
+        QueryBuilder <Question, Integer> queryBuilder =  themeDao.queryBuilder();
+        Where<Question, Integer> where = queryBuilder.where();
+        where.like("niveau_id", niveau);
+        where.and();
+        where.like("theme_id", theme);
+        Dao<Reponse, Integer> repDao = getDao(Reponse.class);
+        QueryBuilder<Reponse, Integer> reponseDb = repDao.queryBuilder();
+        Where<Reponse, Integer> where2 = reponseDb.where();
+        where2.like("boolReponse", true);
+       return reponseDb.join(queryBuilder).query();
+    }
+
+
+    public List<Partie> searchPartiesByThemeAndLevel(Integer theme, Integer niveau) throws SQLException {
+        Dao<Partie, Integer> themeDao = getDao(Partie.class);
+        QueryBuilder <Partie, Integer> queryBuilder =  themeDao.queryBuilder();
+        queryBuilder.orderBy("score", false);
+        Where<Partie, Integer> where = queryBuilder.where();
+        where.like("niveau_id", niveau);
+        where.and();
+        where.like("theme_id", theme);
+        PreparedQuery<Partie> preparedQuery = queryBuilder.prepare();
+        Dao<Partie, Integer> QuestionDao = getDao(Partie.class);
+        return QuestionDao.query(preparedQuery);
+    }
+
+
+    public List<Partie> searchClassificationByThemeAndLevel(Integer theme, Integer niveau) throws SQLException {
+        Dao<Partie, Integer> themeDao = getDao(Partie.class);
+        QueryBuilder<Partie, Integer> st = themeDao.queryBuilder();
+        st.where().like("niveau_id", niveau);
+        st.where().like("theme_id", theme);
+        PreparedQuery<Partie> query = st.prepare();
+        Dao<Partie, Integer> QuestionDao = getDao(Partie.class);
+        return QuestionDao.query(query);
+    }
+
+    public List<Partie> searchPartiesByMember(Integer membre) throws SQLException {
+        Dao<Partie, Integer> PartieDao = getDao(Partie.class);
+        QueryBuilder<Partie, Integer> st = PartieDao.queryBuilder();
+        st.where().like("membre_id", membre);
+        st.orderBy("score", true);
+        PreparedQuery<Partie> query = st.prepare();
+        Dao<Partie, Integer> QuestionDao = getDao(Partie.class);
+        return PartieDao.query(query);
     }
 
     //fonction de connexion

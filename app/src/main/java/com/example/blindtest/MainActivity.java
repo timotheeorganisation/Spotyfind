@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView scoresView;
     private DatabaseManager databaseManager;
-    private Button  btn;
+    private Button btn;
     private Button btnScore;
 
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         scoresView = (TextView) findViewById(R.id.scoresView);
         btn = (Button) findViewById(R.id.btnSeConnecter);
         btnScore = (Button) findViewById(R.id.btnScores);
-        databaseManager = new DatabaseManager( this );
+        databaseManager = new DatabaseManager(this);
         //requêtes
 
      /*   databaseManager.insertMembre(new Membre("vn", "vn", "vn", new Date(), true));
@@ -62,14 +62,14 @@ databaseManager.insertNiveau(new Niveau());*/
 */
 
         List<Question> questions = databaseManager.readQuestions();
-        for(Question question : questions)
-        {
-            scoresView.append("niveau " + String.valueOf(question.getNiveau().getId()) +  "   theme   " + question.getTheme().getLibelle() +  "    musique   " + question.getPathMp3());
+        for (Question question : questions) {
+            scoresView.append("niveau " + String.valueOf(question.getNiveau().getId()) + "   theme   " + question.getTheme().getLibelle() + "    musique   " + question.getPathMp3());
         }
         btn.setEnabled(true);
         //evenement on click )=> changement de fenetre vers login
 
-   btn.setOnClickListener(new View.OnClickListener() {   @Override
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent loginActivity = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(loginActivity);

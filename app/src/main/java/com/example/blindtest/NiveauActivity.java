@@ -30,7 +30,6 @@ public class NiveauActivity extends AppCompatActivity {
         databaseManager = new DatabaseManager( this );
         List<Niveau> niveaux = databaseManager.readNiveaux();
 
-
    //     edtSelectedTheme = findViewById(R.id.selectedTheme);
      //   edtSelectedTheme.setText(this.getIntent().getExtras().toString("theme"));
 
@@ -80,16 +79,11 @@ public class NiveauActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Integer x = btnText.getId();
-
                     Intent niveauActivity = new Intent(NiveauActivity.this, PartieActivity.class);
                     niveauActivity.putExtra("niveau",x);
                     startActivity(niveauActivity);
                 }
             });
         }
-
-        
-
-
     }
 }

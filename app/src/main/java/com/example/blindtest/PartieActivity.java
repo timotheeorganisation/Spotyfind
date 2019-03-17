@@ -28,6 +28,7 @@ public class PartieActivity extends AppCompatActivity {
     private TextView edtScore, textQuestion;
     private DatabaseManager databaseManager;
     private Button btnRep1, btnRep2, btnRep3, btnRep4;
+    private List<Question> questions;
     private boolean trouve;
     public int index;
 
@@ -45,9 +46,7 @@ public class PartieActivity extends AppCompatActivity {
         edtScore.setText("0");
         index = 0;
 
-
         databaseManager = new DatabaseManager(this);
-
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -66,20 +65,29 @@ public class PartieActivity extends AppCompatActivity {
         Membre m = ((Variables) this.getApplication()).getMembreConnecte();
      /*   databaseManager.insertQuestion(new Question("vangelis_cinema_3_cinema_3", "",theme, niveauSelect));
         databaseManager.insertQuestion(new Question("barrylyndon_cinema_3", "",theme, niveauSelect));
-
        databaseManager.insertReponses(new Reponse("Pirates des Caraïbes", false, questions.get(0)));
        databaseManager.insertReponses(new Reponse("2001 L'odysée de l'Espace", false, questions.get(0)));
        databaseManager.insertReponses(new Reponse("Matrix", false, questions.get(0)));
        databaseManager.insertReponses(new Reponse("Conquest of Paradise", false, questions.get(0)));*/
-        List<Question> questions = databaseManager.readQuestions();
-        try {
-            alimenter(questions);
 
+        try {
+            Log.i("requete SEACHLEVEL = ", String.valueOf(niveauSelect.getId()) + String.valueOf(theme.getId()));
+            questions = databaseManager.searchQuestionsByThemeAndLevel(theme.getId(), niveauSelect.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+        for (Question question : questions) {
+            Log.i("question", question.getPathMp3());
+        }
 
+        // List<Question> questions = databaseManager.readQuestions();
+        try {
+            alimenter(questions);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void alimenter(final List<Question> questions) throws SQLException {
         Question question = questions.get(0);
@@ -90,7 +98,6 @@ public class PartieActivity extends AppCompatActivity {
         //recupération path de la musique
         String pathMp3 = question.getPathMp3();
         int soundId = getResources().getIdentifier(pathMp3, "raw", getApplicationContext().getPackageName());
-
         final MediaPlayer mp = MediaPlayer.create(PartieActivity.this, soundId);
         mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
         // mp.setDataSource(getApplicationContext(), pathMp3);
@@ -197,14 +204,11 @@ public class PartieActivity extends AppCompatActivity {
                 }
                 edtScore.setText(String.valueOf(score));
                 suivant(questions);
-
             }
         });
-
     }
-
     public void suivant(List<Question> questions) {
-        if (questions.size() != 0 && index <= 5) {
+        if (questions.size() != 0 && index <= 3) {
             questions.remove(0);
             try {
                 index++;
@@ -218,7 +222,7 @@ public class PartieActivity extends AppCompatActivity {
             Intent ResultatActivity = new Intent(PartieActivity.this, ResultatActivity.class);
             ResultatActivity.putExtra("score", edtScore.getText().toString());
             startActivity(ResultatActivity);
-            Log.i("end", "jeud fini");
+            Log.i("end", "jeu fini");
         }
     }
 

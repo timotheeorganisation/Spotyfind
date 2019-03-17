@@ -18,7 +18,6 @@ import com.j256.ormlite.table.DatabaseTable;
         {
 
         }
-
         public Reponse(String libelleReponse, Boolean boolReponse, Question question) {
             this.libelleReponse = libelleReponse;
             this.boolReponse = boolReponse;

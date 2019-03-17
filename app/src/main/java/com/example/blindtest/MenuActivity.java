@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.example.blindtest.BDD.Session;
 import com.example.blindtest.BDD.Variables;
+import com.example.blindtest.Classes.Membre;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button btnLogout, btnJouer, btnHistorique, btnClassement;
+    private Button btnLogout, btnJouer, btnHistoriqueParties, btnClassementThemes;
     private Session session;
     private TextView ses;
     private static final String PREFS_NAME = "PreName";
@@ -23,7 +24,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        btnHistoriqueParties = findViewById(R.id.btnHistoriqueParties);
+        btnClassementThemes = findViewById(R.id.btnClassementThemes);
         btnJouer = findViewById(R.id.btnJouer);
         ses = findViewById(R.id.edtSession);
         int PRIVATE_MODE =0;
@@ -41,6 +43,8 @@ public class MenuActivity extends AppCompatActivity {
         String s = ((Variables) this.getApplication()).getSomeVariable();
         ses.setText(s);
 
+        Membre membre = ((Variables) this.getApplication()).getMembreConnecte();
+
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +58,22 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent themeActivity = new Intent(MenuActivity.this, ThemeActivity.class);
                 startActivity(themeActivity);
+            }
+        });
+
+        btnClassementThemes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent classementActivity = new Intent(MenuActivity.this, ClassementActivity.class);
+                startActivity(classementActivity);
+            }
+        });
+
+        btnHistoriqueParties.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historiqueActivity = new Intent(MenuActivity.this, HistoriqueActivity.class);
+                startActivity(historiqueActivity);
             }
         });
     }
