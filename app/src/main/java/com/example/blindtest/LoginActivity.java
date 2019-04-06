@@ -90,7 +90,7 @@ import java.sql.SQLException;
         {
             new AlertDialog.Builder(LoginActivity.this)
                     .setTitle("Erreur")
-                    .setMessage("Erreur")
+                    .setMessage("Erreur de connexion, veuillez rééssayer.")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

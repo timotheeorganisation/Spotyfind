@@ -12,15 +12,17 @@
     <TextView
         android:id="@+id/tvTheme"
         android:layout_width="wrap_content"
+        android:textSize="10dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:text="theme"
         android:textColor="@color/colorPrimary"></TextView>
 
     <TextView
         android:id="@+id/tvNiveau"
         android:layout_width="wrap_content"
+        android:textSize="10dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_horizontal"
@@ -31,6 +33,7 @@
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
+        android:textSize="10dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_horizontal"
@@ -40,10 +43,11 @@
 
     <TextView
         android:id="@+id/tvScore"
+        android:textSize="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_weight="1"
+        android:gravity="center_horizontal"
         android:text="lkjhgf"
         android:textColor="@color/colorPrimary"
         tools:text="@string/score"></TextView>

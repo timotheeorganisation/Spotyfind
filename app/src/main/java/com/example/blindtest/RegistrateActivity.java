@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.example.blindtest.BDD.DatabaseManager;
 import com.example.blindtest.Classes.Membre;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 
 public class RegistrateActivity extends AppCompatActivity {
 
@@ -45,6 +47,7 @@ public class RegistrateActivity extends AppCompatActivity {
                     String mdp1 = password1.getText().toString();
                     String mdp2 = password2.getText().toString();
                     String mail = email.getText().toString();
+
                     if (!mdp1.equals(mdp2) || login.equals("") || mail.equals("") || mdp1.equals("") || mdp1.contains(" "))
                     {
                         new AlertDialog.Builder(RegistrateActivity.this)
@@ -56,6 +59,16 @@ public class RegistrateActivity extends AppCompatActivity {
                                     }
                                 }).create().show();
                     }
+                    else if(!checkEmail(mail)) {
+                    new AlertDialog.Builder(RegistrateActivity.this)
+                            .setTitle("Erreur")
+                            .setMessage("email doit etre valide")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }).create().show();
+                }
                     else
                     {
                         //Encryption mdp
@@ -94,4 +107,18 @@ public class RegistrateActivity extends AppCompatActivity {
             }
         });
     }
+
+    private boolean checkEmail(String email) {
+        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
+    }
+
+    public static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
 }

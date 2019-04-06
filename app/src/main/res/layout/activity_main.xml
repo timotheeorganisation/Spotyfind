@@ -22,7 +22,7 @@
         android:textStyle="bold|italic"
         android:textSize="19sp"
         android:inputType="textPersonName"
-        android:text="Quizzical" />
+        android:text="Ecoutez, Devinez, Gagnez !" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -30,7 +30,7 @@
         android:layout_height="232dp"
         android:layout_marginBottom="30dp"
         android:contentDescription="@string/logout"
-        app:srcCompat="@mipmap/logo_spotify" />
+        app:srcCompat="@mipmap/un" />
 
     <Button
         android:id="@+id/btnSeConnecter"
