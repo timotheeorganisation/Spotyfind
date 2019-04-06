@@ -1,6 +1,7 @@
 package com.example.blindtest;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ public class NiveauActivity extends AppCompatActivity {
 
     private DatabaseManager databaseManager;
     private TextView edtSelectedTheme;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,10 @@ public class NiveauActivity extends AppCompatActivity {
 
             if(leString != null) {
                 ((Variables) this.getApplication()).setIdSelectedTheme(Integer.parseInt(leString));
-
                 ((Variables) this.getApplication()).setLibelleSelectedTheme(libelle);
                 try {
                     Theme theme = databaseManager.searchTheme(Integer.parseInt(leString));
                     ((Variables) this.getApplication()).setSelectedTheme(theme);
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -57,9 +57,8 @@ public class NiveauActivity extends AppCompatActivity {
         }
         else
         {
-            edtSelectedTheme.setText(("pas de sting"));
+            edtSelectedTheme.setText(("Pas de reponse"));
         }
-
         for(final Niveau niveau : niveaux)
         {
             final Button btnText = new Button(this);
@@ -67,6 +66,8 @@ public class NiveauActivity extends AppCompatActivity {
             String lvl = " Niveau "+ String.valueOf (niveau.getId());
             btnText.setText(lvl);
             btnText.setId(niveau.getId());
+
+            btnText.setBackgroundColor(Color.GREEN);
             LinearLayout.LayoutParams layoutParam =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);

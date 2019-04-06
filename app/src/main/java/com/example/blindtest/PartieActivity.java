@@ -1,8 +1,10 @@
 package com.example.blindtest;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +88,6 @@ public class PartieActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public void alimenter(final List<Question> questions) throws SQLException {
@@ -206,7 +207,9 @@ public class PartieActivity extends AppCompatActivity {
                 suivant(questions);
             }
         });
+
     }
+
     public void suivant(List<Question> questions) {
         if (questions.size() != 0 && index <= 3) {
             questions.remove(0);
@@ -226,5 +229,20 @@ public class PartieActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).create().show();
+
+
+    }
 
 }

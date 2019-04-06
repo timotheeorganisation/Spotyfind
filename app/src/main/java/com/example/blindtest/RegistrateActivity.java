@@ -45,7 +45,7 @@ public class RegistrateActivity extends AppCompatActivity {
                     String mdp1 = password1.getText().toString();
                     String mdp2 = password2.getText().toString();
                     String mail = email.getText().toString();
-                    if (!mdp1.equals(mdp2) || login.equals("") || mail.equals("") || mdp1.equals("") )
+                    if (!mdp1.equals(mdp2) || login.equals("") || mail.equals("") || mdp1.equals("") || mdp1.contains(" "))
                     {
                         new AlertDialog.Builder(RegistrateActivity.this)
                                 .setTitle("Erreur")
@@ -53,7 +53,6 @@ public class RegistrateActivity extends AppCompatActivity {
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-
                                     }
                                 }).create().show();
                     }
@@ -63,7 +62,7 @@ public class RegistrateActivity extends AppCompatActivity {
                        /* byte[] md5input = mdp1.getBytes();
                         BigInteger md5Data = null;
                         try  {
-                            md5Data = new BigInteger(1,md5.encryptMD5(md5input));
+                            md5Data = new BigInteger(un,md5.encryptMD5(md5input));
                         }
                         catch (Exception e)  {
                             e.printStackTrace();

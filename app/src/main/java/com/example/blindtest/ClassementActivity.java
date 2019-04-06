@@ -1,5 +1,6 @@
 package com.example.blindtest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +47,7 @@ public class ClassementActivity extends AppCompatActivity {
         for (Theme theme : themes) {
             categories.add(theme.getLibelle());
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         spinner.setAdapter(dataAdapter);
 
         ArrayAdapter<String> dataAdapterNiveau = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesNiveaux);
@@ -59,25 +60,21 @@ public class ClassementActivity extends AppCompatActivity {
                 String Niveau = spinner2.getSelectedItem().toString();
                 try {
                     Theme themeSelected = databaseManager.searchThemeByLibelle(Theme);
-                    parties = databaseManager.searchPartiesByThemeAndLevel(themeSelected.getId(), Integer.parseInt(Niveau));
-
-                } catch (SQLException e) {
+//                    ArrayList<Partie> parties2 = new ArrayList<Partie>(parties);
+                    Intent ClassementActivity = new Intent(ClassementActivity.this, ClassementByThemeActivity.class);
+                    ClassementActivity.putExtra("theme", themeSelected.getId());
+                    ClassementActivity.putExtra("niveau", Integer.parseInt(Niveau));
+                    startActivity(ClassementActivity);
+                }
+                    catch (SQLException e) {
                     e.printStackTrace();
                 }
+
                 Log.i("spinner", (Theme + Niveau));
-                ArrayList<Partie> parties2 = new ArrayList<Partie>(parties);
-                ClassementThemeNiveauAdapter adapter = new ClassementThemeNiveauAdapter(this, parties2);
-                //Récupération du composant ListView
-                //Initialisation de la liste avec les données
-                lvHistorique.setAdapter(adapter);
+
             }
         });
-    }}
-     /*   try {
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
     }
+
 }
+

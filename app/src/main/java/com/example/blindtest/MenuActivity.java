@@ -2,6 +2,7 @@ package com.example.blindtest;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,7 +42,8 @@ public class MenuActivity extends AppCompatActivity {
         SharedPreferences prefs = getApplicationContext()
                 .getSharedPreferences("MyPref", 0);
         String s = ((Variables) this.getApplication()).getSomeVariable();
-        ses.setText(s);
+        ses.setText("Bienvenue   " + s);
+        ses.setHintTextColor(Color.BLACK);
 
         Membre membre = ((Variables) this.getApplication()).getMembreConnecte();
 

@@ -11,16 +11,17 @@ import android.widget.TextView;
 import com.example.blindtest.Classes.Partie;
 import com.example.blindtest.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ClassementThemeNiveauAdapter extends BaseAdapter {
 
     // Une liste de personnes
     private List<Partie> mListP;
-
     //Le contexte dans lequel est présent notre adapter
     private Context mContext;
-
     //Un mécanisme pour gérer l'affichage graphique depuis un layout XML
     private LayoutInflater mInflater;
 
@@ -29,21 +30,18 @@ public class ClassementThemeNiveauAdapter extends BaseAdapter {
         mListP = aListP;
         mInflater = LayoutInflater.from(mContext);
     }
-
     public int getCount() {
         return mListP.size();
     }
     public Object getItem(int position) {
         return mListP.get(position);
     }
-
     public long getItemId(int position) {
         return position;
     }
-
     public View getView(int position, View convertView, ViewGroup parent) {
         LinearLayout layoutItem;
-        //(1) : Réutilisation des layouts
+        //(un) : Réutilisation des layouts
         if (convertView == null) {
             //Initialisation de notre item à partir du  layout XML "personne_layout.xml"
             layoutItem = (LinearLayout) mInflater.inflate(R.layout.activity_classification, parent, false);
@@ -54,10 +52,12 @@ public class ClassementThemeNiveauAdapter extends BaseAdapter {
         TextView tvMembre = (TextView)layoutItem.findViewById(R.id.tvMembre);
         TextView tvDate = (TextView)layoutItem.findViewById(R.id.tvDate);
         TextView tvScore = (TextView)layoutItem.findViewById(R.id.tvScore);
-
+        Date date = mListP.get(position).getDatePartie();
+        String currentDate = DateFormat.getDateInstance().format(date.getTime());
         //(3) : Renseignement des valeurs
         tvMembre.setText(mListP.get(position).getMembre().getPseudo());
-        tvDate.setText(String.valueOf(mListP.get(position).getDatePartie().toString()));
+        tvDate.setText(String.valueOf(currentDate
+        ));
         tvScore.setText(String.valueOf(mListP.get(position).getScore()));
 
         //On retourne l'item créé.

@@ -25,7 +25,7 @@ public class HistoriqueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_historique);
-        databaseManager = new DatabaseManager( this );
+        databaseManager = new DatabaseManager( this);
         lvHistorique = findViewById(R.id.lvHistorique);
        // ListView lvHistorique = (ListView) findViewById(R.id.lvHistorique);
         super.onCreate(savedInstanceState);

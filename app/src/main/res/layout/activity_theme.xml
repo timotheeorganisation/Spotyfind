@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     android:id="@+id/layout"
     android:orientation="vertical"
-    android:background="@color/design_default_color_primary_dark"
+    android:background="@color/colorBlackButton"
     tools:context=".ThemeActivity">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollView"
-
-    >
+    android:id="@+id/scrollView">
 
 </ScrollView>
     <TextView

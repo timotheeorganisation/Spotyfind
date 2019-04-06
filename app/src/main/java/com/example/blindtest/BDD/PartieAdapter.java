@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.blindtest.Classes.Partie;
 import com.example.blindtest.R;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PartieAdapter extends BaseAdapter {
@@ -43,13 +45,16 @@ public class PartieAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         LinearLayout layoutItem;
-        //(1) : Réutilisation des layouts
+        //(un) : Réutilisation des layouts
         if (convertView == null) {
             //Initialisation de notre item à partir du  layout XML "personne_layout.xml"
             layoutItem = (LinearLayout) mInflater.inflate(R.layout.activity_historique_listview, parent, false);
         } else {
             layoutItem = (LinearLayout) convertView;
         }
+        Date date = mListP.get(position).getDatePartie();
+        String currentDate = DateFormat.getDateInstance().format(date.getTime());
+
         //(2) : Récupération des TextView de notre layout
         TextView tvTheme = (TextView)layoutItem.findViewById(R.id.tvTheme);
         TextView tvNiveau = (TextView)layoutItem.findViewById(R.id.tvNiveau);
@@ -59,7 +64,7 @@ public class PartieAdapter extends BaseAdapter {
         //(3) : Renseignement des valeurs
         tvTheme.setText(mListP.get(position).getTheme().getLibelle());
         tvNiveau.setText("Niveau" + String.valueOf(mListP.get(position).getNiveau().getId()));
-        tvDate.setText(String.valueOf(mListP.get(position).getDatePartie().toString()));
+        tvDate.setText(String.valueOf(currentDate));
         tvScore.setText(String.valueOf(mListP.get(position).getScore()));
 
         //On retourne l'item créé.

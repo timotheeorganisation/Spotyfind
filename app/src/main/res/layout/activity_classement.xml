@@ -5,13 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/design_default_color_primary_dark"
-    tools:context=".ClassementActivity">
+    android:background="@color/colorGreenSpoty"
+    tools:context=".ClassementActivity"
+    >
+
+    <TextView
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text="Theme" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="100dp"></Spinner>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Niveau" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -22,12 +39,10 @@
         android:id="@+id/btnClassementThemes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Regarder @string/classementThemes" />
+        android:background="@color/colorBlackButton"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="@string/classementThemes"
+        android:textColor="@color/colorPrimary" />
 
-    <ListView
-        android:id="@+id/lvHistorique"
-        android:layout_width="match_parent"
-        android:layout_height="273dp"
-        android:layout_marginTop="130dp"
-        />
 </LinearLayout>

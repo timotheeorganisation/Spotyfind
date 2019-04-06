@@ -6,23 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.blindtest.BDD.DatabaseManager;
 import com.example.blindtest.Classes.Membre;
 import com.example.blindtest.Classes.Niveau;
 import com.example.blindtest.Classes.Question;
 import com.example.blindtest.Classes.Theme;
-
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView scoresView;
     private DatabaseManager databaseManager;
-    private Button btn;
+    private Button btn, btnInscription;
     private Button btnScore;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //récupération objets
-        scoresView = (TextView) findViewById(R.id.scoresView);
         btn = (Button) findViewById(R.id.btnSeConnecter);
-        btnScore = (Button) findViewById(R.id.btnScores);
+        btnInscription = findViewById(R.id.btnInscription);
         databaseManager = new DatabaseManager(this);
         //requêtes
 
@@ -45,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
         databaseManager.insertNiveau(new Niveau());
 databaseManager.insertNiveau(new Niveau());
 databaseManager.insertNiveau(new Niveau());*/
-
-
-
 
        /* List<Membre> membres = databaseManager.readMembres();
         for(Membre membre : membres)
@@ -62,9 +54,7 @@ databaseManager.insertNiveau(new Niveau());*/
 */
 
         List<Question> questions = databaseManager.readQuestions();
-        for (Question question : questions) {
-            scoresView.append("niveau " + String.valueOf(question.getNiveau().getId()) + "   theme   " + question.getTheme().getLibelle() + "    musique   " + question.getPathMp3());
-        }
+
         btn.setEnabled(true);
         //evenement on click )=> changement de fenetre vers login
 
@@ -73,11 +63,15 @@ databaseManager.insertNiveau(new Niveau());*/
             public void onClick(View v) {
                 Intent loginActivity = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(loginActivity);
-
             }
         });
 
+        btnInscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registrateActivity = new Intent(MainActivity.this, RegistrateActivity.class);
+                startActivity(registrateActivity);
+            }
+        });
     }
-
-
 }

@@ -1,47 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGreenSpoty">
 
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorGreenSpoty"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="40"
+        android:textStyle="bold|italic"
+        android:textSize="19sp"
+        android:inputType="textPersonName"
+        android:text="Quizzical" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="232dp"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/logout"
+        app:srcCompat="@mipmap/logo_spotify" />
 
     <Button
         android:id="@+id/btnSeConnecter"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="99dp"
         android:layout_gravity="center_horizontal"
         android:padding="30dp"
         android:text="@string/seConnecter"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorBlackButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.182" />
 
     <Button
-        android:id="@+id/btnScores"
-        android:layout_width="410dp"
+        android:id="@+id/btnInscription"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/score"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="10dp"
+        android:background="@color/colorBlackButton"
+        android:text="S'inscrire"
+        android:textColor="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/scoresView"
-        android:layout_width="288dp"
-        android:layout_height="265dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="32dp"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-</android.support.constraint.ConstraintLayout>
-
+</LinearLayout>
+</ScrollView>

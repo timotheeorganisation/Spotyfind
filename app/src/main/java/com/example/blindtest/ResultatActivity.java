@@ -1,5 +1,6 @@
 package com.example.blindtest;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -32,24 +33,26 @@ public class ResultatActivity extends AppCompatActivity {
     private DatabaseManager databaseManager;
     private String score;
     private ListView lvHistorique;
+    private TextView tvScore;
     private List<Partie> parties;
     private List<Reponse> resultats;
-
-
+    private Button btnRejouer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat);
         lvHistorique = findViewById(R.id.lvHistorique);
+        tvScore = findViewById(R.id.tvScore);
         LinearLayout layoutReponses = (LinearLayout) findViewById(R.id.layout);
         layoutReponses.removeAllViewsInLayout();
-
+        btnRejouer = findViewById(R.id.btnRejouer);
         databaseManager = new DatabaseManager(this);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             score = extras.getString("score");
         }
+        tvScore.setText("Votre Score " + String.valueOf(score));
         Niveau niveauSelect = ((Variables) this.getApplication()).getSelectedNiveau();
         Theme theme = ((Variables) this.getApplication()).getSelectedTheme();
         Membre m = ((Variables) this.getApplication()).getMembreConnecte();
@@ -79,44 +82,42 @@ public class ResultatActivity extends AppCompatActivity {
             final MediaPlayer mp = MediaPlayer.create(ResultatActivity.this, soundId);
             mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-            Button btnListen = new Button((this));
-            btnListen.setText("Réécouter");
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             lp.height = 60;
             lp.width =400;
-            btnListen.setLayoutParams(lp);
-
-            btnListen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mp.stop();
-                    mp.release();
-                    mp.reset();
-                    try {
-                        mp.prepare();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    mp.start();
-                }
-            });
-            layoutReponses.addView(btnListen);
             TextView tvReponse = new TextView(this);
-            tvReponse.setText("Question " + cpt + " : "+reponse.getLibelleReponse());cpt++;
+            tvReponse.setText("Question " + cpt + " : "+reponse.getLibelleReponse());
+            cpt++;
             LinearLayout.LayoutParams layoutParam =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams.MATCH_PARENT);
             layoutParam.setMargins(0,10,0,10);
             // layoutParam.setMargins(10,mar,10,mar+theme.getId());
             tvReponse.setLayoutParams(layoutParam);
             layoutReponses.addView(tvReponse);
         }
+
+        btnRejouer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Activity = new Intent(ResultatActivity.this, MenuActivity.class);
+                startActivity(Activity);
+            }
+        });
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ResultatActivity.this, MenuActivity.class);
+        startActivity(intent);
+    }
+
     /*reste à faire :
      * affichage classement du niveau dans Résultat DESIGN
      * voir résultat des questions dans Résultat DESIGN
      * affichage classement by theme/niveau avec combo box
      * mes parties
      * */
+
+    //scénario de tests manuel util + manuel dev (architecture du code)
 }
 

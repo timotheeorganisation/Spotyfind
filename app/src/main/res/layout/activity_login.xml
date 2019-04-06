@@ -9,11 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorGreenSpoty"
     tools:context=".LoginActivity">
 
     <Button
         android:id="@+id/btnInscription"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorBlackButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/inscription" />
@@ -38,6 +40,8 @@
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorBlackButton"
         android:layout_height="wrap_content"
         android:text="@string/seConnecter" />
 
