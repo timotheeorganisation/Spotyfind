@@ -40,7 +40,6 @@ public class ThemeActivity extends AppCompatActivity {
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParam.setMargins(0, 10, 0, 10);
-            // layoutParam.setMargins(10,mar,10,mar+theme.getId());
             btnText.setLayoutParams(layoutParam);
             layoutTheme.addView(btnText);
 

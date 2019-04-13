@@ -40,7 +40,7 @@
         android:layout_alignParentBottom="true" >
 
         <TextView
-            android:id="@+id/btn"
+            android:id="@+id/btn5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="25"
@@ -48,7 +48,7 @@
             android:text="Membre" />
 
         <TextView
-            android:id="@+id/btn"
+            android:id="@+id/btn4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="25"

@@ -74,10 +74,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
             Dao<Membre, Integer> dao = getDao(Membre.class);
             dao.create(membre);
             ContentValues values = new ContentValues();
-            //values.put(COLUMN_EMAIL, membre.getMail());
-            //values.put(COLUMN_PASS, membre.getMdp());
-
-            Log.i("DATABASE", "insertions ok");
+            Log.i("DATABASE", "La ligne est inserée");
         } catch (Exception exception) {
             Log.e("DATABASE", "Erreur d'insertion dans la base", exception);
         }
@@ -87,7 +84,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         try {
             Dao<Membre, Integer> dao = getDao(Membre.class);
             List<Membre> membres = dao.queryForAll();
-            Log.i("DATABASE", "insertions ok");
+            Log.i("DATABASE", "Consultation réussie");
             return membres;
         } catch (Exception exception) {
             Log.e("DATABASE", "Erreur de consult dans la base", exception);
@@ -282,7 +279,7 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         Dao<Partie, Integer> PartieDao = getDao(Partie.class);
         QueryBuilder<Partie, Integer> st = PartieDao.queryBuilder();
         st.where().like("membre_id", membre);
-        st.orderBy("score", true);
+        st.orderBy("datePartie", false);
         PreparedQuery<Partie> query = st.prepare();
         Dao<Partie, Integer> QuestionDao = getDao(Partie.class);
         return PartieDao.query(query);

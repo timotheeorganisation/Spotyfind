@@ -19,12 +19,12 @@ public class Variables extends Application {
     public String getSomeVariable() {
         return someVariable;
     }
-//String s = ((Variables) this.getApplication()).getSomeVariable();
+//Utilisation : String s = ((Variables) this.getApplication()).getSomeVariable();
 
     public void setSomeVariable(String someVariable) {
         this.someVariable = someVariable;
     }
-   // ((Variables) this.getApplication()).setSomeVariable("foo");
+   // Utilisation ((Variables) this.getApplication()).setSomeVariable("foo");
 
     public int getIdSelectedTheme() {
         return idSelectedTheme;

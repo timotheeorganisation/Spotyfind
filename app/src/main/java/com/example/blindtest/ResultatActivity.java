@@ -48,6 +48,8 @@ public class ResultatActivity extends AppCompatActivity {
         layoutReponses.removeAllViewsInLayout();
         btnRejouer = findViewById(R.id.btnRejouer);
         databaseManager = new DatabaseManager(this);
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             score = extras.getString("score");
@@ -66,13 +68,7 @@ public class ResultatActivity extends AppCompatActivity {
         }
         ArrayList<Partie> parties2 = new ArrayList<Partie>(parties);
 
-        //   adapter = new ArrayAdapter<String>(this, R.layout.list-items     //   lvHistorique.addHeaderView(View);
-        //Récupération de la liste des personnes
-        // ArrayList<Partie> listP = parties;
-        //Création et initialisation de l'Adapter pour les personnes
         ClassementThemeNiveauAdapter adapter = new ClassementThemeNiveauAdapter(this, parties2);
-        //Récupération du composant ListView
-        //Initialisation de la liste avec les données
         lvHistorique.setAdapter(adapter);
         int cpt = 1;
 
@@ -110,14 +106,5 @@ public class ResultatActivity extends AppCompatActivity {
         Intent intent = new Intent(ResultatActivity.this, MenuActivity.class);
         startActivity(intent);
     }
-
-    /*reste à faire :
-     * affichage classement du niveau dans Résultat DESIGN
-     * voir résultat des questions dans Résultat DESIGN
-     * affichage classement by theme/niveau avec combo box
-     * mes parties
-     * */
-
-    //scénario de tests manuel util + manuel dev (architecture du code)
 }
 

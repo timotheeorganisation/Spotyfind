@@ -71,7 +71,6 @@ public class ClassementActivity extends AppCompatActivity {
                 }
 
                 Log.i("spinner", (Theme + Niveau));
-
             }
         });
     }

@@ -3,6 +3,7 @@ package com.example.blindtest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,27 +33,16 @@ public class MainActivity extends AppCompatActivity {
         databaseManager = new DatabaseManager(this);
         //requêtes
 
-     /*   databaseManager.insertMembre(new Membre("vn", "vn", "vn", new Date(), true));
+     /* databaseManager.insertMembre(new Membre("vn", "vn", "vn", new Date(), true));
         databaseManager.insertMembre(new Membre("user", "user", "user@user.fr", new Date(), false));
-    databaseManager.insertTheme(new Theme("Classique"));
+        databaseManager.insertTheme(new Theme("Classique"));
         databaseManager.insertTheme(new Theme("Cinema"));
         databaseManager.insertTheme(new Theme("Series"));
         databaseManager.insertNiveau(new Niveau());
-databaseManager.insertNiveau(new Niveau());
-databaseManager.insertNiveau(new Niveau());*/
-
-       /* List<Membre> membres = databaseManager.readMembres();
-        for(Membre membre : membres)
-        {
-            scoresView.append(membre.toString());
-        }
-        List<Theme> themes = databaseManager.readThemes();
-        for(Theme theme : themes)
-        {
-            scoresView.append(theme.toString());
-        }
-*/
-
+        databaseManager.insertNiveau(new Niveau());
+        databaseManager.insertNiveau(new Niveau());*/
+        List<Membre> membres = databaseManager.readMembres();
+        Log.i("membres", membres.get(0).getMail());
         List<Question> questions = databaseManager.readQuestions();
 
         btn.setEnabled(true);
